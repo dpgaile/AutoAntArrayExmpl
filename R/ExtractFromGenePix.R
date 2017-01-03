@@ -92,7 +92,7 @@ RowTriMeans=function(X,type=8) apply(X,1,TriMean)
 #'
 #' @export
 #'
-AAplotByMean <- function(AAdat,SampleIndices,clrs=1,pchs=3,MeanSubset=NA, useMat="log", cex=0.5){
+AAplotByMean <- function(AAdat,SampleIndices,clrs=1,pchs=3,MeanSubset=NA, useMat="log", cex=0.5,...){
     # SampleIndices=1:10; clrs=1; pchs=3; MeanSubset=6:10
 
     nsmpl=length(SampleIndices)
@@ -131,7 +131,7 @@ AAplotByMean <- function(AAdat,SampleIndices,clrs=1,pchs=3,MeanSubset=NA, useMat
     }
 
     plot(rep(RW,2*nsmpl),cbind(W_1[,SampleIndices],W_2[,SampleIndices]),
-         type="n",xlab=xlbl,ylab=ylbl)
+         type="n",xlab=xlbl,ylab=ylbl,...)
 
     if(useMat=="resid") abline(h=0,col="steelblue",lwd=3)
 
@@ -156,7 +156,7 @@ AAplotByMean <- function(AAdat,SampleIndices,clrs=1,pchs=3,MeanSubset=NA, useMat
 #'
 #' @export
 #'
-AAplotDens <- function(AAdat,SampleIndices,clrs=1,useMat="log",xlims=NA, returnModes=T){
+AAplotDens <- function(AAdat,SampleIndices,clrs=1,useMat="log",xlims=NA, returnModes=T,...){
     # SampleIndices=1:10; clrs=1
 
     nsmpl=length(SampleIndices)
@@ -199,7 +199,7 @@ AAplotDens <- function(AAdat,SampleIndices,clrs=1,useMat="log",xlims=NA, returnM
     if(is.na(xlims[1])) xlims=range(tdens$x)
 
     plot(rep(tdens$x,nsmpl),as.vector(DensRay[,SampleIndices]),
-         type="n",xlab=xlbl,ylab=ylbl,xlim=xlims)
+         type="n",xlab=xlbl,ylab=ylbl,xlim=xlims,...)
 
     if(useMat=="resid") abline(h=0,col="steelblue",lwd=3)
 
