@@ -18,6 +18,12 @@ ExtractFromGenePix <- function(GPlist,SignalName,SampleIndices){
         X_raw_2=GPlist[[which(names(GPlist)==SignalName)]][nonSpcl,SampleIndices,2]
     )
 
+    # add raw residuals..
+    RW=RowTriMeans(cbind(out$X_raw_1,out$X_raw_2))
+    RW_MAT=matrix(rep(RW,dim(out$X_raw_1)[2]),ncol=dim(out$X_raw_1)[2])
+    out$X_resid_1=out$X_raw_1-RW_MAT
+    out$X_resid_2=out$X_raw_2-RW_MAT
+
     class(out)="AutoAnt"
     return(out)
 }
@@ -165,14 +171,20 @@ AAplotDens <- function(AAdat,SampleIndices,clrs=1,useMat="log",xlims=NA, returnM
     if(useMat=="log"){
         W_1=AAdat$W_1
         W_2=AAdat$W_2
-        xlbl="TriMean log(Signal)"
+        xlbl="log(Signal)"
     }
 
     if(useMat=="raw"){
         W_1=AAdat$X_raw_1
         W_2=AAdat$X_raw_2
-        xlbl="TriMean Signal"
-     }
+        xlbl="Signal"
+    }
+
+    if(useMat=="raw.resid"){
+        W_1=AAdat$X_resid_1
+        W_2=AAdat$X_resid_2
+        xlbl="Raw Residual"
+    }
 
     if(useMat=="resid"){
         W_1=AAdat$W_1
@@ -182,7 +194,7 @@ AAplotDens <- function(AAdat,SampleIndices,clrs=1,useMat="log",xlims=NA, returnM
         RW_MAT=matrix(rep(RW,dim(W_1)[2]),ncol=dim(W_1)[2])
         W_1=W_1-RW_MAT
         W_2=W_2-RW_MAT
-        xlbl="Residuals wrt TriMean log(Signal)"
+        xlbl="Residuals wrt log(Signal)"
     }
 
     ylbl="Estimated Density"
