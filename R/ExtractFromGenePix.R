@@ -199,11 +199,11 @@ AAplotDens <- function(AAdat,SampleIndices,clrs=1,useMat="log",xlims=NA, returnM
 
     ylbl="Estimated Density"
 
-    DensRay=array(NA,dim=c(1024,dim(W_1)[2]))
+    DensRay=array(NA,dim=c(10240,dim(W_1)[2]))
     Modes=rep(NA,dim(W_1)[2])
     Wrnge=range(as.vector(cbind(W_1[,SampleIndices],W_2[,SampleIndices])))
     for(j in SampleIndices){
-        tdens=density(c(W_1[,j],W_2[,j]),n=1024,from=Wrnge[1],to=Wrnge[2])
+        tdens=density(c(W_1[,j],W_2[,j]),n=10240,from=Wrnge[1],to=Wrnge[2])
         DensRay[,j]=tdens$y
         Modes[j]=tdens$x[which.max(tdens$y)]
     }
