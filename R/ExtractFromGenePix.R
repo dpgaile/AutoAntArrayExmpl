@@ -180,6 +180,13 @@ AAplotDens <- function(AAdat,SampleIndices,clrs=1,useMat="log",xlims=NA, returnM
         xlbl="Signal"
     }
 
+    if(useMat=="norm"){
+        W_1=AAdat$X_n_1
+        W_2=AAdat$X_n_2
+        xlbl="Normalized Signal"
+    }
+
+
     if(useMat=="raw.resid"){
         W_1=AAdat$X_resid_1
         W_2=AAdat$X_resid_2
