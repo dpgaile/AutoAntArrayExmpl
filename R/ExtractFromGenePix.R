@@ -201,7 +201,9 @@ AAplotDens <- function(AAdat,SampleIndices,clrs=1,useMat="log",xlims=NA, returnM
 
     DensRay=array(NA,dim=c(10240,dim(W_1)[2]))
     Modes=rep(NA,dim(W_1)[2])
-    Wrnge=range(as.vector(cbind(W_1[,SampleIndices],W_2[,SampleIndices])))
+   # Wrnge=range(as.vector(cbind(W_1[,SampleIndices],W_2[,SampleIndices])))
+    Wrnge=quantile(as.vector(cbind(W_1[,SampleIndices],W_2[,SampleIndices])),
+                   probs=c(4/188,184/188))
     for(j in SampleIndices){
         tdens=density(c(W_1[,j],W_2[,j]),n=10240,from=Wrnge[1],to=Wrnge[2])
         DensRay[,j]=tdens$y
